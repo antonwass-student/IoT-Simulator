@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Devices</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
+      <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  </head>
+  <body>
+
+
+  <div ng-app="simulationApp" ng-controller="devicesController">
+
+    <h1>Manage devices</h1>
+    <table class="table">
+        <th>Device ID</th>
+        <th>Status</th>
+        <th></th>
+
+
+        <tr ng-repeat="device in devices">
+            <td>{{device.deviceId}}</td>
+            <td>{{device.connectionState}}</td>
+            <td><button ng-click="deleteDevice(device.deviceId)">Delete</button></td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="text" placeholder="<device-id>" ng-model="newDevice.deviceId">
+            </td>
+            <td></td>
+            <td><button ng-click="createDevice()">Add</button></td>
+        </tr>
+
+
+
+    </table>
+
+  </div>
+
+    <script>
+      var app = angular.module('simulationApp', []);
+    </script>
+
+    <script src="javascripts/devicesController.js"></script>
+  
+  </body>
+</html>
