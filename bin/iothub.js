@@ -1,5 +1,5 @@
 var iothub = require('azure-iothub');
-var config = require('../configurations.json');
+var config = require('../secrets.json');
 
 var connectionString  = config.connection_string_read_write;
 

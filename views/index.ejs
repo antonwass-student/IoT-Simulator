@@ -2,10 +2,33 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+    <h3>Routes</h3>
+
+    <p>
+  /devices - manage iot-devices <br>
+  /simulation - simulate iot-devices <br>
+
+    </p>
+
+  <h3>Setup</h3>
+
+  <p>
+    <p>
+    Create a file named <b>secrets.json</b> under root with the following key/value pairs.<br>
+    </p>
+
+    <b>
+    connection_string_read_write: &#60;azure-connection-string with read/write priviliges&#62;<br>
+    </b>
+
+  </p>
+
   </body>
 </html>
