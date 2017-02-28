@@ -17,15 +17,36 @@
                 <table class="table">
                     <th>Device ID</th>
                     <th>Status</th>
-                    <th>Start/Stop</th>
+                    <th>Configuration</th>
+                    <th>Start</th>
+                    <th>Stop</th>
                     <tr ng-repeat="device in devices">
                         <td>{{device.deviceId}}</td>
                         <td>{{device.connectionState}}</td>
-                        <td><button ng-click="startSimulation()">Start</button></td>
+                        <td><textarea ng-model="device.configJson"></textarea> </td>
+                        <td><button ng-click="startSimulation(device);getDevices();">Start</button></td>
+                        <td><button ng-click="stopSimulation(device.deviceId);getDevices();">Stop</button></td>
                     </tr>
                 </table>
 
+                <div>
+                    <fieldset>
+                        <legend>Configuration Tool</legend>
+                        Frequency<br><input type="text" ng-model="configTemplate.frequency"><br><br>
 
+                        Data<br>
+                        <div ng-repeat="tuple in configTemplate.data">
+                            <input type="text" ng-model="tuple.key"> : <input type="text" ng-model="tuple.value">
+                        </div>
+                        <button ng-click="addDataTuple()">New tuple</button>
+
+                        <br><br><br>
+                        <button ng-click="generateJsonConfig()">Generate Configuration</button><br>
+                        <textarea ng-model="configOutput"></textarea>
+                    </fieldset>
+                </div>
+
+                <br>
                 <div>
                     No simulations are running.
                 </div>

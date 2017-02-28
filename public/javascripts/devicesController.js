@@ -52,7 +52,7 @@ app.controller('devicesController', function($scope){
                 }
             }
         });
-    }
+    };
 
     $scope.getDevices();
 });

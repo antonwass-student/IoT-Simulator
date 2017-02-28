@@ -10,6 +10,11 @@ router.get('/', function (req, res, next) {
 router.get('/get', function(req, res, next){
     iothub.listDevices(function(devices){
         //console.dir(devices);
+
+        devices.forEach(function(item, index){
+            console.log(item.authentication.symmetricKey);
+        });
+
         res.json({"devices":devices});
     });
 });
@@ -42,7 +47,7 @@ router.post('/create', function(req, res, next){
         if(err)
             res.status(500).json({
                 message:"Could not create device.",
-                err:err
+                err:""
             });
         else if(success)
             res.status(200).json({
