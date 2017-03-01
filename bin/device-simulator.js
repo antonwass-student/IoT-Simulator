@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+// Heavily modified by Anton Wass
+
 'use strict';
 
 var Protocol = require('azure-iot-device-mqtt').Mqtt;
@@ -52,9 +54,11 @@ var simulateDevice = function(device){
                 var dataJson = JSON.parse(JSON.stringify({
                     deviceId: device.deviceId,
                     timestamp:Date.now(),
+                    interval: device.config.interval,
                     data:device.config.data
                 }));
 
+                // See if data should be random.
                 dataJson.data.forEach(function(item, index){
                     var value = item[Object.keys(item)[0]];
                     //examine the value to see if it should be replaced by random data
@@ -88,6 +92,7 @@ var simulateDevice = function(device){
                 //TODO: investigate in this re-connect call.
             });
 
+            //Add this device to a global array so that it can be accessed later.
             devices.push({
                 deviceInfo:device,
                 client:client,
@@ -117,9 +122,6 @@ function printResultFor(op) {
         if (res) console.log(op + ' status: ' + res.constructor.name);
     };
 }
-
-
-
 
 module.exports = {
     simulateDevice: simulateDevice,
