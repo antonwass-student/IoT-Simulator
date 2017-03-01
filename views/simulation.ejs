@@ -32,13 +32,13 @@
                 <div>
                     <fieldset>
                         <legend>Configuration Tool</legend>
-                        Frequency<br><input type="text" ng-model="configTemplate.frequency"><br><br>
+                        Send Interval<br><input type="text" ng-model="configTemplate.interval"><br><br>
 
-                        Data<br>
+                        Data - use min-max for random values (i.e 10-15 in value field)<br>
                         <div ng-repeat="tuple in configTemplate.data">
-                            <input type="text" ng-model="tuple.key"> : <input type="text" ng-model="tuple.value">
+                            <input type="text" ng-model="tuple.key" placeholder="key"> : <input type="text" ng-model="tuple.value" placeholder="value">
                         </div>
-                        <button ng-click="addDataTuple()">New tuple</button>
+                        <button ng-click="addDataTuple()">Add tuple</button>
 
                         <br><br><br>
                         <button ng-click="generateJsonConfig()">Generate Configuration</button><br>
@@ -48,7 +48,6 @@
 
                 <br>
                 <div>
-                    No simulations are running.
                 </div>
 
             </div>

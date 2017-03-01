@@ -17,7 +17,7 @@ app.controller('simulationController', function($scope){
     };
 
     $scope.generateJsonConfig = function(){
-        var outputJson = {frequency:$scope.configTemplate.frequency};
+        var outputJson = {interval:$scope.configTemplate.interval};
         outputJson.data = [];
 
         var dataString = "";

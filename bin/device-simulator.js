@@ -43,20 +43,30 @@ var simulateDevice = function(device){
                 // MQTT is simpler: it accepts the message by default, and doesn't support rejecting or abandoning a message.
             });
 
-            if(device.config.frequency < 1000)
-                device.config.frequency = 1000;
+            if(device.config.interval < 1000)
+                device.config.interval = 1000;
 
             // Create a message and send it to the IoT Hub every second
             var sendInterval = setInterval(function () {
                 var windSpeed = 10 + (Math.random() * 4); // range: [10, 14]
                 var dataJson = JSON.parse(JSON.stringify({
                     deviceId: device.deviceId,
+                    timestamp:Date.now(),
                     data:device.config.data
                 }));
 
                 dataJson.data.forEach(function(item, index){
                     var value = item[Object.keys(item)[0]];
                     //examine the value to see if it should be replaced by random data
+
+                    if(value.split("-").length==2){
+                        var min = parseInt(value.split("-")[0]);
+                        var max = parseInt(value.split("-")[1]);
+
+                        var newValue = Math.floor(min + Math.random() * (max - min));
+                        item[Object.keys(item)] = newValue;
+                    }
+
                 });
 
                 var data = JSON.stringify(dataJson);
@@ -65,7 +75,7 @@ var simulateDevice = function(device){
                 message.properties.add('key', 'value');
                 console.log('Sending message: ' + message.getData());
                 client.sendEvent(message, printResultFor('send'));
-            }, device.config.frequency);
+            }, device.config.interval);
 
             client.on('error', function (err) {
                 console.error(err.message);
